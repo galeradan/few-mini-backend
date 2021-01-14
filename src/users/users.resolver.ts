@@ -37,6 +37,14 @@ export class UserResponse {
   user?: User;
 }
 
+@ObjectType()
+export class LoginResponse {
+  @Field(() => [FieldError], { nullable: true })
+  error?: FieldError[];
+  @Field(() => String, { nullable: true })
+  accessToken?: string;
+}
+
 @Resolver()
 export class UsersResolver {
   constructor(private readonly userService: UsersService) {}
@@ -51,7 +59,7 @@ export class UsersResolver {
     return this.userService.create(input);
   }
 
-  @Mutation(() => UserResponse)
+  @Mutation(() => LoginResponse)
   async login(@Args('account') account: LoginInput) {
     return this.userService.login(account);
   }

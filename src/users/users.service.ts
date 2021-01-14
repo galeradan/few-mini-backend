@@ -2,8 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MongoRepository } from 'typeorm';
 import * as uuid from 'uuid';
+import * as jwt from 'jsonwebtoken';
 import { User } from './user.entity';
-import { LoginInput, RegisterInput, UserResponse } from './users.resolver';
+import { LoginInput, LoginResponse, RegisterInput, UserResponse } from './users.resolver';
 const argon2 = require('argon2');
 
 @Injectable()
@@ -17,7 +18,11 @@ export class UsersService {
     return this.userRepository.find();
   }
 
-  async login(account: LoginInput): Promise<UserResponse> {
+  async createToken({id, username}: User){
+     return jwt.sign({id, username}, 'temporarysecret')
+  }
+
+  async login(account: LoginInput): Promise<LoginResponse> {
     const user = await this.userRepository.findOne({username: account.username})
     if(!user){
         return {
@@ -40,9 +45,10 @@ export class UsersService {
             ]
           };
     }
+    const accessToken = await this.createToken(user)
     return {
-        user
-      };
+        accessToken
+    };
   }
 
   async create(input: RegisterInput): Promise<UserResponse> {

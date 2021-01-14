@@ -27,6 +27,11 @@ type UserResponse {
   user: User
 }
 
+type LoginResponse {
+  error: [FieldError!]
+  accessToken: String
+}
+
 type Query {
   blogs: [Blog!]!
   testUser: String!
@@ -34,7 +39,7 @@ type Query {
 
 type Mutation {
   register(input: RegisterInput!): UserResponse!
-  login(account: LoginInput!): UserResponse!
+  login(account: LoginInput!): LoginResponse!
 }
 
 input RegisterInput {
