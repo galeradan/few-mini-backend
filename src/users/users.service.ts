@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { MongoRepository } from 'typeorm';
 import * as uuid from 'uuid';
 import { User } from './user.entity';
-import { RegisterInput, UserResponse } from './users.resolver';
+import { LoginInput, RegisterInput, UserResponse } from './users.resolver';
 const argon2 = require('argon2');
 
 @Injectable()
@@ -15,6 +15,34 @@ export class UsersService {
 
   async findAll(): Promise<User[]> {
     return this.userRepository.find();
+  }
+
+  async login(account: LoginInput): Promise<UserResponse> {
+    const user = await this.userRepository.findOne({username: account.username})
+    if(!user){
+        return {
+            error: [
+              {
+                field: 'email',
+                message: 'email does not exists'
+              }
+            ]
+          };
+    }
+    const valid = await argon2.verify(user.password, account.password);
+    if(!valid){
+        return {
+            error: [
+              {
+                field: 'password',
+                message: 'password is incorrect'
+              }
+            ]
+          };
+    }
+    return {
+        user
+      };
   }
 
   async create(input: RegisterInput): Promise<UserResponse> {
@@ -40,6 +68,5 @@ export class UsersService {
           }
         ]
       };
-
   }
 }

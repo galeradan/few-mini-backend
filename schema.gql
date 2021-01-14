@@ -34,10 +34,16 @@ type Query {
 
 type Mutation {
   register(input: RegisterInput!): UserResponse!
+  login(account: LoginInput!): UserResponse!
 }
 
 input RegisterInput {
   username: String!
   password: String!
   role: String!
+}
+
+input LoginInput {
+  username: String!
+  password: String!
 }

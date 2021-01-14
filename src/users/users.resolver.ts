@@ -13,6 +13,14 @@ export class RegisterInput {
   role: string; // converted from boolean to string: there might be more roles in the future - can be another relationship with another entity = Roles
 }
 
+@InputType()
+export class LoginInput {
+  @Field(() => String)
+  username: string;
+  @Field(() => String)
+  password: string;
+}
+
 @ObjectType()
 export class FieldError {
   @Field()
@@ -41,6 +49,11 @@ export class UsersResolver {
   @Mutation(() => UserResponse)
   async register(@Args('input') input: RegisterInput) {
     return this.userService.create(input);
+  }
+
+  @Mutation(() => UserResponse)
+  async login(@Args('account') account: LoginInput) {
+    return this.userService.login(account);
   }
 
 }
