@@ -1,4 +1,6 @@
-import { Args, Field, InputType, Mutation, ObjectType, Query, Resolver } from "@nestjs/graphql";
+import { UseGuards } from "@nestjs/common";
+import { Args, Context, Field, InputType, Mutation, ObjectType, Query, Resolver } from "@nestjs/graphql";
+import { AuthGuard } from "./auth.guard";
 import { User } from "./user.entity";
 import { UsersService } from "./users.service";
 
@@ -53,6 +55,13 @@ export class UsersResolver {
   async testUser() {
     return 'Test User'
   }
+
+  @Query(()=>User)
+  @UseGuards(new AuthGuard)
+  me(@Context('user') user: User ){
+        return user;
+  }
+  
 
   @Mutation(() => UserResponse)
   async register(@Args('input') input: RegisterInput) {

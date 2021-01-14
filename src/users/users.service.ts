@@ -18,8 +18,8 @@ export class UsersService {
     return this.userRepository.find();
   }
 
-  async createToken({id, username}: User){
-     return jwt.sign({id, username}, 'temporarysecret')
+  async createToken({id, username, role}: User){
+     return jwt.sign({id, username, role}, 'temporarysecret')
   }
 
   async login(account: LoginInput): Promise<LoginResponse> {

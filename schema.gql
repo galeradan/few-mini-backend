@@ -35,6 +35,7 @@ type LoginResponse {
 type Query {
   blogs: [Blog!]!
   testUser: String!
+  me: User!
 }
 
 type Mutation {
