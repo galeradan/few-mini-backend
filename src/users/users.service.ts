@@ -17,7 +17,7 @@ export class UsersService {
     return this.userRepository.find();
   }
 
-  async create(input: RegisterInput): Promise<User | UserResponse> {
+  async create(input: RegisterInput): Promise<UserResponse> {
     const isExist = await this.userRepository.findOne({username: input.username})
 
     if(!isExist){
