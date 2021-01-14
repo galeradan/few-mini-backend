@@ -35,8 +35,8 @@ export class UsersService {
     return {
         error: [
           {
-            field: 'email',
-            message: 'email already exists, please use another one'
+            field: 'username',
+            message: 'username already exists, please use another one'
           }
         ]
       };
