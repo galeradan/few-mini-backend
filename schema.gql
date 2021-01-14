@@ -11,7 +11,23 @@ type Blog {
   publishedAt: String!
 }
 
+type User {
+  id: ID!
+  username: String!
+  role: String!
+}
+
 type Query {
-  test: String!
   blogs: [Blog!]!
+  testUser: String!
+}
+
+type Mutation {
+  register(input: RegisterInput!): User!
+}
+
+input RegisterInput {
+  username: String!
+  password: String!
+  role: String!
 }
