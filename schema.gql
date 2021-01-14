@@ -17,13 +17,23 @@ type User {
   role: String!
 }
 
+type FieldError {
+  field: String!
+  message: String!
+}
+
+type UserResponse {
+  error: [FieldError!]
+  user: User
+}
+
 type Query {
   blogs: [Blog!]!
   testUser: String!
 }
 
 type Mutation {
-  register(input: RegisterInput!): User!
+  register(input: RegisterInput!): UserResponse!
 }
 
 input RegisterInput {

@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { MongoRepository } from 'typeorm';
 import * as uuid from 'uuid';
 import { User } from './user.entity';
-import { RegisterInput } from './users.resolver';
+import { RegisterInput, UserResponse } from './users.resolver';
 const argon2 = require('argon2');
 
 @Injectable()
@@ -17,13 +17,29 @@ export class UsersService {
     return this.userRepository.find();
   }
 
-  async create(input: RegisterInput): Promise<User> {
-    const user = new User();
-    const hashedPassword = await argon2.hash(input.password);
-    user.id = uuid.v4();
-    user.username = input.username;
-    user.password = hashedPassword;
-    user.role = input.role;
-    return this.userRepository.save(user);
+  async create(input: RegisterInput): Promise<User | UserResponse> {
+    const isExist = await this.userRepository.findOne({username: input.username})
+
+    if(!isExist){
+        const user = new User();
+        const hashedPassword = await argon2.hash(input.password);
+        user.id = uuid.v4();
+        user.username = input.username;
+        user.password = hashedPassword;
+        user.role = input.role;
+        this.userRepository.save(user);
+        return {
+            user
+        }
+    }
+    return {
+        error: [
+          {
+            field: 'email',
+            message: 'email already exists, please use another one'
+          }
+        ]
+      };
+
   }
 }
