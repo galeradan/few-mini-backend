@@ -9,7 +9,7 @@ import { Blog } from "./blog.entity";
 export class BlogsResolver {
 
   @Query(()=> [Blog])
-  @UseGuards(new AuthGuard)
+  @UseGuards(AuthGuard)
   async blogs(@Context('user') user: User): Promise<Blog[]>{
       if(user.role == 'admin'){
         return Blog.find();

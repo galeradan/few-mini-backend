@@ -1,7 +1,6 @@
 import { CanActivate, ExecutionContext, HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { GqlExecutionContext } from "@nestjs/graphql";
 import * as jwt from 'jsonwebtoken';
-import { Observable } from "rxjs";
 
 @Injectable()
 export class AuthGuard implements CanActivate{
@@ -11,6 +10,7 @@ export class AuthGuard implements CanActivate{
             return false
         }
         ctx.user = await this.validateToken(ctx.headers.authorization);
+
         return true;
     }
 
