@@ -28,8 +28,8 @@ export class UsersService {
         return {
             error: [
               {
-                field: 'email',
-                message: 'email does not exists'
+                field: 'username',
+                message: 'username does not exists'
               }
             ]
           };

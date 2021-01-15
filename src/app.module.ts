@@ -10,7 +10,11 @@ import { UsersModule } from './users/users.modules';
   imports: [
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
-      context:({req})=>({headers: req.headers})
+      context:({req})=>({headers: req.headers}),
+      cors: {
+        credentials: true,
+        origin: true,
+      },
     }),
     TypeOrmModule.forRoot({
       type: 'mongodb',
