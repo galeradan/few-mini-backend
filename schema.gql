@@ -30,6 +30,7 @@ type UserResponse {
 type LoginResponse {
   error: [FieldError!]
   accessToken: String
+  user: User
 }
 
 type Query {

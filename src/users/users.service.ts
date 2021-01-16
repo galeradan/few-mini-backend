@@ -47,7 +47,8 @@ export class UsersService {
     }
     const accessToken = await this.createToken(user)
     return {
-        accessToken
+        accessToken,
+        user
     };
   }
 

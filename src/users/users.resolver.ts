@@ -45,6 +45,8 @@ export class LoginResponse {
   error?: FieldError[];
   @Field(() => String, { nullable: true })
   accessToken?: string;
+  @Field(() => User, { nullable: true })
+  user?: User
 }
 
 @Resolver()
