@@ -1,37 +1,44 @@
-import { Field, ID, Int, ObjectType } from "@nestjs/graphql";
-import {Entity, ObjectID, ObjectIdColumn, Column, CreateDateColumn, UpdateDateColumn, BaseEntity} from "typeorm";
+import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
+import {
+  Entity,
+  ObjectID,
+  ObjectIdColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  BaseEntity,
+} from 'typeorm';
 
 @ObjectType()
-@Entity({name: 'blogs'})
+@Entity({ name: 'blogs' })
 export class Blog extends BaseEntity {
+  @Field(() => ID)
+  @ObjectIdColumn()
+  id: ObjectID;
 
-    @Field(() => ID)
-    @ObjectIdColumn()
-    id: ObjectID;
+  @Field(() => String)
+  @Column()
+  title: string;
 
-    @Field(() => String)
-    @Column()
-    title: string;
+  @Field(() => String)
+  @Column()
+  content: string;
 
-    @Field(() => String)
-    @Column()
-    content: string;
-    
-    @Field(() => Int)
-    @Column()
-    views: number;
+  @Field(() => Int)
+  @Column()
+  views: number;
 
-    @Field(() => String)
-    @Column()
-    status: string;
+  @Field(() => String)
+  @Column()
+  status: string;
 
-    @Field(() => String)
-    @Column()
-    publishedAt: Date;
+  @Field(() => String)
+  @Column()
+  publishedAt: Date;
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @UpdateDateColumn()
-    updatedAt = new Date();
+  @UpdateDateColumn()
+  updatedAt = new Date();
 }

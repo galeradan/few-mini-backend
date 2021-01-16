@@ -1,9 +1,17 @@
-import { UseGuards } from "@nestjs/common";
-import { Args, Context, Field, InputType, Mutation, ObjectType, Query, Resolver } from "@nestjs/graphql";
-import { AuthGuard } from "./auth.guard";
-import { User } from "./user.entity";
-import { UsersService } from "./users.service";
-
+import { UseGuards } from '@nestjs/common';
+import {
+  Args,
+  Context,
+  Field,
+  InputType,
+  Mutation,
+  ObjectType,
+  Query,
+  Resolver,
+} from '@nestjs/graphql';
+import { AuthGuard } from './auth.guard';
+import { User } from './user.entity';
+import { UsersService } from './users.service';
 
 @InputType()
 export class RegisterInput {
@@ -46,24 +54,23 @@ export class LoginResponse {
   @Field(() => String, { nullable: true })
   accessToken?: string;
   @Field(() => User, { nullable: true })
-  user?: User
+  user?: User;
 }
 
 @Resolver()
 export class UsersResolver {
   constructor(private readonly userService: UsersService) {}
 
-  @Query(()=>String)
+  @Query(() => String)
   async testUser() {
-    return 'Test User'
+    return 'Test User';
   }
 
-  @Query(()=>User)
-  @UseGuards(new AuthGuard)
-  me(@Context('user') user: User ){
-        return user;
+  @Query(() => User)
+  @UseGuards(new AuthGuard())
+  me(@Context('user') user: User) {
+    return user;
   }
-  
 
   @Mutation(() => UserResponse)
   async register(@Args('input') input: RegisterInput) {
@@ -74,5 +81,4 @@ export class UsersResolver {
   async login(@Args('account') account: LoginInput) {
     return this.userService.login(account);
   }
-
 }
