@@ -41,4 +41,4 @@ $ yarn start:dev
 ```
 
 ## Frontend
-- Once backend is running okay, please setup the fronend by following the instructions included in this [repository](https://github.com/galeradan/few-mini-frontend)
+- Once backend is running okay, please setup the frontend by following the instructions included in this [repository](https://github.com/galeradan/few-mini-frontend)
