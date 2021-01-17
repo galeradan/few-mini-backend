@@ -24,7 +24,7 @@ $ yarn
 
 ## Database
 - The app uses MongoDB as Database
-  - If you dont have mongodb in your db please install it by following this [documentation](https://docs.mongodb.com/manual/installation/)
+  - If you dont have mongodb yet, please install it by following this [documentation](https://docs.mongodb.com/manual/installation/)
   - Use a GUI like [MongoDB Compass](https://www.mongodb.com/products/compass) to do the steps below
   - Alternatively, I created a hosted mongodb database in MongoDB Atlas, just replace the MONGO_URI with the one stated [here](https://www.evernote.com/shard/s723/sh/ce68be97-4d75-71fe-f7d3-e60bcade2f28/97d79501524206d7bb55a468981b634c). No need to follow the steps below for database.
 - Create a mongodb database named `few` or the same as the one mention in the .env for backend
