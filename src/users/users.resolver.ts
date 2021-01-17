@@ -66,17 +66,20 @@ export class UsersResolver {
     return 'Test User';
   }
 
+  // returns details of the authenticated user
   @Query(() => User)
   @UseGuards(new AuthGuard())
   me(@Context('user') user: User) {
     return user;
   }
 
+  // graphql mutation connected to userService.create
   @Mutation(() => UserResponse)
   async register(@Args('input') input: RegisterInput) {
     return this.userService.create(input);
   }
 
+  // graphql mutation connected to userService.login
   @Mutation(() => LoginResponse)
   async login(@Args('account') account: LoginInput) {
     return this.userService.login(account);

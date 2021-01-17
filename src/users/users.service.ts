@@ -19,16 +19,19 @@ export class UsersService {
     private readonly userRepository: MongoRepository<User>,
   ) {}
 
+  // finds all user
   async findAll(): Promise<User[]> {
     return this.userRepository.find();
   }
 
+  // creates a token that expires in 12hrs
   async createToken({ id, username, role }: User) {
     return jwt.sign({ id, username, role }, `${process.env.SECRET}`, {
       expiresIn: '12h',
     });
   }
 
+  // Logins the users and returns user details and a token that will be use for AuthGuard Protected resource
   async login(account: LoginInput): Promise<LoginResponse> {
     const user = await this.userRepository.findOne({
       username: account.username,
@@ -61,6 +64,7 @@ export class UsersService {
     };
   }
 
+  // registers a user and uses argon2 to hash the password
   async create(input: RegisterInput): Promise<UserResponse> {
     const isExist = await this.userRepository.findOne({
       username: input.username,

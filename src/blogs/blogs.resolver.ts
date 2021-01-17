@@ -6,6 +6,7 @@ import { Blog } from './blog.entity';
 
 @Resolver()
 export class BlogsResolver {
+  // returns all blogs available based on the authenticated user's role
   @Query(() => [Blog])
   @UseGuards(AuthGuard)
   async blogs(@Context('user') user: User): Promise<Blog[]> {
