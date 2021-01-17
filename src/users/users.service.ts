@@ -24,7 +24,9 @@ export class UsersService {
   }
 
   async createToken({ id, username, role }: User) {
-    return jwt.sign({ id, username, role }, `${process.env.SECRET}`);
+    return jwt.sign({ id, username, role }, `${process.env.SECRET}`, {
+      expiresIn: '12h',
+    });
   }
 
   async login(account: LoginInput): Promise<LoginResponse> {
