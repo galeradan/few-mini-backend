@@ -1,5 +1,7 @@
 ## Description
-This is the backend of FEW: Mini Project. Uses NestJS, GraphQL, TypeOrm, and MongoDB.
+This is the backend of FEW: Mini Project. Uses NestJS, GraphQL, TypeOrm, and MongoDB. 
+
+For Frontend please visit this [repository](https://github.com/galeradan/few-mini-frontend)
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
@@ -36,3 +38,7 @@ Once the above steps are okay, let's run the app
 ```bash
 # development
 $ yarn start:dev
+```
+
+## Frontend
+- Once backend is running okay, please setup the fronend by following the instructions included in this [repository](https://github.com/galeradan/few-mini-frontend)
